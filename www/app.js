@@ -1,4 +1,8 @@
-import { domain, clientId, audience } from './env.js'
+
+const domain = 'dev-h63x8ohlbl1q2qkp.us.auth0.com'
+const clientId = 'XX15k7a9Be1KE1Usl1aaOrDdzKJwvtUp'
+const audience = 'https://jeremyisaraddude.com'
+
 let user = null
 let AuthService = null
 
