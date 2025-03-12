@@ -6,7 +6,9 @@ export const AnimalSchema = new Schema(
     emoji: { type: String, required: true, minLength: 1, maxLength: 25 },
     talent: { type: String, required: true, minLength: 1, maxLength: 100 }
   },
+  // schema options
   {
-    timestamps: true
+    timestamps: true,
+    toJSON: { virtuals: true }
   }
 )
