@@ -5,11 +5,12 @@ import BaseController from "../utils/BaseController.js";
 // NOTE class name must match file name!
 export class AnimalsController extends BaseController {
   constructor() {
-    // NOTE check where postman is sending request to!
+    // NOTE check where postman is sending the request to!
     super('api/animals')
     this.router
       .get('', this.getAllAnimals)
       .put('/:animalId', this.updateAnimal)
+      // request URL --> api/animals/6615c24419fb342a28d6bd45/shows
       .get('/:animalId/shows', this.getShowsByAnimalId)
   }
 
@@ -51,6 +52,7 @@ export class AnimalsController extends BaseController {
   async getShowsByAnimalId(request, response, next) {
     try {
       const animalId = request.params.animalId
+      // NOTE use the service that interacts with that specific collection in the database
       const shows = await showsService.getShowsByAnimalId(animalId)
       response.send(shows)
     } catch (error) {

@@ -1,5 +1,6 @@
 import { Schema } from "mongoose";
 
+// REVIEW many-to-many relationship
 export const ShowSchema = new Schema(
   {
     title: { type: String, required: true, minLength: 3, maxLength: 50 },
@@ -11,6 +12,8 @@ export const ShowSchema = new Schema(
     toJSON: { virtuals: true }
   }
 )
+
+// NOTE a schema can have as many virtuals as you need
 
 ShowSchema.virtual('animal', {
   ref: 'Animal',
