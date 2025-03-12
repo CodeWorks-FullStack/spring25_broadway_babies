@@ -13,6 +13,12 @@ class ShowsService {
     await show.populate('handler', 'name picture')
     return show
   }
+
+  async getShowsByAnimalId(animalId) {
+    //                                       { animalId: '6615c244650db689bde4f58e' }
+    const shows = await dbContext.Shows.find({ animalId: animalId }).populate('handler', 'name picture')
+    return shows
+  }
 }
 
 export const showsService = new ShowsService()

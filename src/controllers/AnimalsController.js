@@ -1,4 +1,5 @@
 import { animalsService } from "../services/AnimalsService.js";
+import { showsService } from "../services/ShowsService.js";
 import BaseController from "../utils/BaseController.js";
 
 // NOTE class name must match file name!
@@ -9,6 +10,7 @@ export class AnimalsController extends BaseController {
     this.router
       .get('', this.getAllAnimals)
       .put('/:animalId', this.updateAnimal)
+      .get('/:animalId/shows', this.getShowsByAnimalId)
   }
 
   /**
@@ -36,6 +38,21 @@ export class AnimalsController extends BaseController {
       const animalUpdateData = request.body // what I want to update about the animal
       const animal = await animalsService.updateAnimal(animalId, animalUpdateData)
       response.send(animal)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  /**
+   * @param {import("express").Request} request
+   * @param {import("express").Response} response
+   * @param {import("express").NextFunction} next
+   */
+  async getShowsByAnimalId(request, response, next) {
+    try {
+      const animalId = request.params.animalId
+      const shows = await showsService.getShowsByAnimalId(animalId)
+      response.send(shows)
     } catch (error) {
       next(error)
     }
