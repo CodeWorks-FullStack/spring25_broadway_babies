@@ -8,6 +8,7 @@ export class AnimalsController extends BaseController {
     super('api/animals')
     this.router
       .get('', this.getAllAnimals)
+      .put('/:animalId', this.updateAnimal)
   }
 
   /**
@@ -19,6 +20,22 @@ export class AnimalsController extends BaseController {
     try {
       const animals = await animalsService.getAllAnimals()
       response.send(animals)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  /**
+   * @param {import("express").Request} request
+   * @param {import("express").Response} response
+   * @param {import("express").NextFunction} next
+   */
+  async updateAnimal(request, response, next) {
+    try {
+      const animalId = request.params.animalId // which animal I want to update
+      const animalUpdateData = request.body // what I want to update about the animal
+      const animal = await animalsService.updateAnimal(animalId, animalUpdateData)
+      response.send(animal)
     } catch (error) {
       next(error)
     }
